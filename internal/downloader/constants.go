@@ -21,7 +21,7 @@ var FlagsConfig = flags{
 	},
 	Output: flagConfigItem{
 		Name:         "output",
-		DefaultValue: "downloads",
+		DefaultValue: "images",
 		Shorthand:    "o",
 		Usage:        "Directory to save downloaded images",
 	},

@@ -1,7 +1,4 @@
-/*
-Copyright © 2026 NAME HERE <EMAIL ADDRESS>
-
-*/
+// Package main. Copyright © 2026 Eduardo Varela eduardovarela139@gmail.com
 package main
 
 import "github.com/EduardoV-dev/images-downloader/cmd"
