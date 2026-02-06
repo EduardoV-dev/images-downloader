@@ -20,6 +20,7 @@ By default it reads `images.txt` and writes to the `images/` folder.
 
 - `-f`, `--file`  Path to the text file containing image URLs (default: `images.txt`)
 - `-o`, `--output`  Directory to save downloaded images (default: `images`)
+- `-t`, `--timeout`  Timeout in seconds for each image request (default: `5`)
 
 ### Examples
 
@@ -39,6 +40,10 @@ go run . --output downloads
 # Custom input and output
 
 go run . --file my-images.txt --output downloads
+
+# Custom timeout (seconds)
+
+go run . --timeout 10
 ```
 
 ## Input file format

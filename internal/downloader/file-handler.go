@@ -13,7 +13,7 @@ func createOutDir(outdirPath string) {
 	}
 }
 
-func extractImageURLsFromFile(filePath string) []string {
+func extractImageURLsFromFile(filePath string) []image {
 	file, err := os.Open(filePath)
 
 	if err != nil {
@@ -23,37 +23,45 @@ func extractImageURLsFromFile(filePath string) []string {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	imageUrls := []string{}
+	images := []image{}
 
 	for scanner.Scan() {
+		fileLinesCount++
 		url := scanner.Text()
 
-		if ok := isValidUrl(url); ok {
-			imageUrls = append(imageUrls, scanner.Text())
+		if err := isValidUrl(url); err != nil {
+			fmt.Printf("[ERROR]: %s\n", err.Error())
+			continue
 		}
+
+		images = append(images, image{url: url, line: fileLinesCount})
+		imagesInFileCount++
 	}
 
 	if err := scanner.Err(); err != nil {
 		panic(err)
 	}
 
-	return imageUrls
+	return images
 }
 
-func isValidUrl(url string) bool {
+func isValidUrl(url string) error {
 	if err := isASingleImage(url); err != nil {
-		fmt.Println(err)
-		return false
+		return err
 	}
 
-	return true
+	return nil
 }
 
 func isASingleImage(url string) error {
 	httpCount := strings.Count(url, "http")
 
+	if httpCount == 0 {
+		return fmt.Errorf("%s is not a valid image url", url)
+	}
+
 	if httpCount > 1 {
-		return fmt.Errorf("ERROR: %s contains multiple images on the same line, place each image on their own line\n", url)
+		return fmt.Errorf("%s contains multiple images on the same line, place each image on their own line", url)
 	}
 
 	return nil

@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/EduardoV-dev/images-downloader/internal/downloader"
+	"github.com/EduardoV-dev/images-downloader/internal/flags"
 	"github.com/spf13/cobra"
 )
 
@@ -27,6 +28,7 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringP(downloader.FlagsConfig.File.Name, downloader.FlagsConfig.File.Shorthand, downloader.FlagsConfig.File.DefaultValue, downloader.FlagsConfig.File.Usage)
-	rootCmd.PersistentFlags().StringP(downloader.FlagsConfig.Output.Name, downloader.FlagsConfig.Output.Shorthand, downloader.FlagsConfig.Output.DefaultValue, downloader.FlagsConfig.Output.Usage)
+	rootCmd.PersistentFlags().StringP(flags.FlagsConfig.File.Name, flags.FlagsConfig.File.Shorthand, flags.FlagsConfig.File.DefaultValue, flags.FlagsConfig.File.Usage)
+	rootCmd.PersistentFlags().StringP(flags.FlagsConfig.Output.Name, flags.FlagsConfig.Output.Shorthand, flags.FlagsConfig.Output.DefaultValue, flags.FlagsConfig.Output.Usage)
+	rootCmd.PersistentFlags().UintP(flags.FlagsConfig.Timeout.Name, flags.FlagsConfig.Timeout.Shorthand, flags.FlagsConfig.Timeout.DefaultValue, flags.FlagsConfig.Timeout.Usage)
 }
